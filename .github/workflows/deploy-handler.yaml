@@ -1,0 +1,39 @@
+name: Deploy Event Handler
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "event-handler/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCOUNT_ID: ${{ vars.AWS_ACCOUNT_ID }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Serverless Framework
+        run: npm install -g serverless@3
+
+      - name: Install Dependencies
+        run: |
+          cd event-handler
+          npm install
+
+          - name: Configure AWS credentials using OIDC
+          uses: aws-actions/configure-aws-credentials@v4
+          with:
+            aws-region: ${{ env.AWS_REGION }}
+            role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/github_deploy_role
