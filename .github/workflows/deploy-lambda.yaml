@@ -27,11 +27,10 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          cd event-handler
           npm install
 
-          - name: Configure AWS credentials using OIDC
-          uses: aws-actions/configure-aws-credentials@v4
-          with:
-            aws-region: ${{ env.AWS_REGION }}
-            role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/github_deploy_role
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/github_deploy_role
