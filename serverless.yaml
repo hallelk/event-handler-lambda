@@ -27,14 +27,6 @@ provider:
         - events:PutEvents
       Resource: "*"
 
-resources:
-  Resources:
-    DeploymentBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: event-handler-deployment
-        AccessControl: Private
-        
 functions:
   eventProcessor:
     handler: src/handlers/eventProcessor.handler
