@@ -42,4 +42,4 @@ jobs:
       - name: Deploy to AWS
         run: |
           serverless print
-          serverless deploy --stage $SLSS_STAGE
+          serverless deploy
