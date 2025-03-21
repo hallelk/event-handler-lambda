@@ -12,7 +12,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-      
+
     env:
       AWS_ACCOUNT_ID: ${{ vars.AWS_ACCOUNT_ID }}
       AWS_REGION: ${{ vars.AWS_REGION }}
@@ -38,3 +38,8 @@ jobs:
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/github_deploy_role
+    
+      - name: Deploy to AWS
+        run: |
+          serverless print
+          serverless deploy --stage $SLSS_STAGE

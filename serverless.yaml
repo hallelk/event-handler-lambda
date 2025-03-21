@@ -1,11 +1,22 @@
 service: event-handler
 
+custom:
+  env:
+    DEPLOYMENT_BUCKET_NAME: event-handler-deployment
+
 provider:
   name: aws
   runtime: nodejs18.x
   region: ${ env:AWS_REGION }
   environment:
     AWS_ACCOUNT_ID: ${ env:AWS_ACCOUNT_ID }
+    SMTP_HOST: ${ssm:/sys/SMTP_HOST}
+    SMTP_PORT: ${ssm:/sys/SMTP_PORT}
+    SMTP_USERNAME: ${ssm:/sys/SMTP_USERNAME}
+    SMTP_PASSWORD: ${ssm:/sys/SMTP_PASSWORD}
+  deploymentBucket:
+    name: ${self:custom.env.DEPLOYMENT_BUCKET_NAME}
+    serverSideEncryption: AES256
   memorySize: 256
   timeout: 10
   iamRoleStatements:
