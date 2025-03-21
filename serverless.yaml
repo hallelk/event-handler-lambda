@@ -7,7 +7,7 @@ custom:
 provider:
   name: aws
   runtime: nodejs18.x
-  region: ${ env:AWS_REGION }
+  region: eu-west-1
   environment:
     AWS_ACCOUNT_ID: ${ env:AWS_ACCOUNT_ID }
     SMTP_HOST: ${ssm:/sys/SMTP_HOST}
