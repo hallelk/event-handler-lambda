@@ -1,6 +1,7 @@
 service: event-handler
 
 custom:
+  stage: ${opt:stage, 'prod'}
   env:
     DEPLOYMENT_BUCKET_NAME: event-handler-deployment
 
@@ -8,6 +9,7 @@ provider:
   name: aws
   runtime: nodejs18.x
   region: eu-central-1
+  stage: ${self:custom.stage}
   environment:
     AWS_ACCOUNT_ID: ${ env:AWS_ACCOUNT_ID }
     SMTP_HOST: ${ssm:/sys/SMTP_HOST}
