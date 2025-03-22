@@ -1,4 +1,4 @@
-export const handler = async (event) => {
+const handler = async (event) => {
   console.log("Received event:", JSON.stringify(event, null, 2));
 
   try {
@@ -14,3 +14,5 @@ export const handler = async (event) => {
       return { statusCode: 500, body: JSON.stringify({ error: "Internal Server Error" }) };
   }
 };
+
+module.exports = { handler };
